@@ -25,4 +25,3 @@ app.listen(app.get("PORT"), (req, res) => {
     console.log(`Server started at http://localhost:${app.get("PORT")}`);
 });
 
-//database connection confirmation

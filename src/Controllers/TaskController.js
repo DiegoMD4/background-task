@@ -22,31 +22,22 @@ const getTaskById = async (req, res) => {
 };
 
 const postTask = async (req, res) => {
-    const requestBody = {
-        title: req.body.title,
-        description: req.body.description,
-        due_date: req.body.due_date,
-    };
-
+    const { title, description, due_date } = req.body;
     let query = `INSERT INTO tasks (title, description, due_date) VALUES (?, ?, ?)`;
-    await connection.query(
-        query,
-        [requestBody.title, requestBody.description, requestBody.due_date],
-        (err, result) => {
-            if (err) {
-                console.error("Error executing query:", err.stack);
-            } else {
-                res.status(200).json({ message: "inserted correctly" });
-                return console.log(result);
-            }
+    await connection.query(query, [title, description, due_date], (err, result) => {
+        if (err) {
+            console.error("Error executing query:", err.stack);
+        } else {
+            res.status(200).json({ message: "inserted correctly" });
+            return console.log(result);
         }
-    );
+    });
 };
 
 const updateTask = async (req, res) => {
     const { id } = req.params;
     const { title, description } = req.body;
-    console.log({ title, description });
+
     let query = `UPDATE tasks set title=?, description= ? WHERE id = ?`;
     connection.query(query, [title, description, id], (err, result) => {
         if (err) {

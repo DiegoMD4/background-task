@@ -4,18 +4,20 @@ Desarrollar una aplicación backend que gestione tareas de una lista de pendient
 Requisitos:
 API RESTful con las siguientes funcionalidades:
 
-Crear una tarea
+✅Crear una tarea 
 Endpoint: POST /tasks
 Datos de entrada: title, description, due_date
-Obtener todas las tareas
+✅Obtener todas las tareas
 Endpoint: GET /tasks
 Obtener una tarea por ID
 Endpoint: GET /tasks/:id
-Actualizar una tarea
+✅Actualizar una tarea
 Endpoint: PUT /tasks/:id
 Datos de entrada: title, description, due_date
-Eliminar una tarea
-Endpoint: DELETE /tasks/:id
+✅Eliminar una tarea
+Endpoint: DELETE /tasks/:id 
+
+
 Tareas en segundo plano:
 
 Un proceso que corra cada hora y envíe un recordatorio (por ejemplo, log a la consola) para las tareas cuya fecha de vencimiento sea dentro de las próximas 24 horas.

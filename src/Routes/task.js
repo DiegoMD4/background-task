@@ -1,36 +1,32 @@
 import express from "express";
 import connection from "../database/config.js";
+import { deleteTask, getTask, getTaskById, postTask, updateTask } from "../Controllers/TaskController.js";
 const router = express.Router();
 
-router.get("/get", (req, res) => {
-  res.send("This is get task view");
-});
+const finishingTask = () => {
+    let query = `SELECT *, DATEDIFF(due_date, CURRENT_DATE) AS date_difference
+    FROM tasks
+    WHERE DATEDIFF(due_date, CURRENT_DATE) = 1`;
 
-router.post("/post", (req, res) => {
+    connection.query(query, (err, result) => {
+        if (err) console.error("Error executing query:", err.stack);
+        console.log(result);
+    });
+};
 
-  const requestBody = {
-    title: req.body.title,
-    description: req.body.description,
-    due_date: req.body.due_date
-  }
+(() => {
+    setInterval(finishingTask, 60 * 1000);
+})();
 
- 
-  let query = `INSERT INTO tasks (title, description, due_date) VALUES (?, ?, ?)`;
-  connection.query(query, [requestBody.title, requestBody.description, requestBody.due_date], (err, result) => {
-    if (err) {
-      console.error('Error executing query:', err.stack);
-    } else {
-      res.status(200).json({message: 'inserted correctly'});
-      return  console.log(result);
-    }
-  });
-});
 
-router.put("/put", (req, res) => {
-  res.send("This is put task view");
-});
-router.delete("/delete", (req, res) => {
-  res.send("This is delete task view");
-});
+router.get("/get", getTask);
+
+router.get("/get/:id", getTaskById);
+
+router.post("/post", postTask);
+
+router.put("/put/:id", updateTask);
+
+router.delete("/delete/:id", deleteTask);
 
 export default router;

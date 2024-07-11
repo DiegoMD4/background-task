@@ -1,6 +1,6 @@
 import express from "express";
-import connection from "../database/config.js";
-import { deleteTask, getTask, getTaskById, postTask, updateTask } from "../Controllers/TaskController.js";
+import connection from "../Database/config.js";
+import {deleteTask, getTask, getTaskById, postTask, updateTask} from "../Controllers/taskController.js";
 const router = express.Router();
 
 const finishingTask = () => {
@@ -17,7 +17,6 @@ const finishingTask = () => {
 (() => {
     setInterval(finishingTask, 60 * 1000);
 })();
-
 
 router.get("/get", getTask);
 

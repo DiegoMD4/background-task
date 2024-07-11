@@ -1,4 +1,4 @@
-import connection from "../database/config.js";
+import connection from "../Database/config.js";
 
 const getTask = async (req, res) => {
     let query = `SELECT * FROM tasks`;
@@ -6,7 +6,8 @@ const getTask = async (req, res) => {
         if (err) {
             console.log("Error executing query:", err.stack);
         }
-        return res.status(200).json(result);
+       
+        return res.render('task');
     });
 };
 
@@ -43,7 +44,8 @@ const updateTask = async (req, res) => {
         if (err) {
             console.log("Error executing query:", err.stack);
         }
-        return res.status(200).json({ message: "Element modified" });
+        res.status(200).json({ message: "Element modified" });
+        return console.log(result);
     });
 };
 

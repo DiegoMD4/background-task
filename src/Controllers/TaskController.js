@@ -7,7 +7,7 @@ const getTask = async (req, res) => {
             console.log('Error executing query:', err.stack);
         }
 
-        return res.render('task');
+        return res.render('task', {result});
     });
 };
 

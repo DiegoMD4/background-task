@@ -1,6 +1,8 @@
 import connection from '../Database/config.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 const saltRounds = 10;
+const secretKey = "secret";
 
 const getUser = async (req, res) => {
     let query = `SELECT * FROM users`;
@@ -53,16 +55,22 @@ const loginUser = async (req, res) => {
             const match = await bcrypt.compare(password, user.password);
 
             if (match) {
-                // Aquí puedes generar y devolver un token JWT si lo deseas
-                return res.status(200).json({ message: 'Login successful', user });
+                const token = jwt.sign({ email: user.email }, secretKey, { expiresIn: "1h" });
+                console.log('Generated Token:', token);
+                return res.status(200).json({ message: 'Login successful', user, token });
             } else {
                 return res.status(401).json({ message: 'Invalid email or password' });
             }
         });
-        
+
     } catch (error) {
         console.error('Error checking user:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
-export { getUser, postUser, loginUser };
+
+
+
+
+
+export { getUser, postUser, loginUser};

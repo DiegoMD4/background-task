@@ -1,10 +1,10 @@
 import express from 'express';
-import { getUser, loginUser, postUser } from '../Controllers/userController.js';
+import { getUser, loginUser, registerUser } from '../Controllers/userController.js';
 const router = express();
 
 router.get('/get', getUser);
 
-router.post('/post', postUser);
+router.post('/register', registerUser);
 
 // AUTH
 router.post('/login', loginUser)

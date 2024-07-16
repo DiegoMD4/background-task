@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-const secretKey = "secret";
+
 
 function verifyToken(req, res, next) {
     const header = req.header("Authorization") || "";
@@ -8,7 +8,7 @@ function verifyToken(req, res, next) {
       return res.status(401).json({ message: "Token not provied" });
     }
     try {
-      const payload = jwt.verify(token, secretKey);
+      const payload = jwt.verify(token, process.env.SECRET_KEY);
       console.log('Token Payload:', payload);
       req.email = payload.email;
       next();

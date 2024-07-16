@@ -1,10 +1,8 @@
-const userTable = `CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    total_task INT NULL
-);
-`;
+const userModel = {
+    select: `SELECT * FROM users;`,
+    insert: `INSERT INTO users(name, password, email) VALUES (?, ?, ?);`,
+    login: `SELECT * FROM users WHERE email = ?;`
+}
 
-export { userTable };
+
+export { userModel };

@@ -1,13 +1,9 @@
-const taskTable = `CREATE TABLE IF NOT EXISTS tasks (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    due_date DATETIME NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-`;
+const taskModel = {
+    select:`SELECT * FROM tasks`,
+    selectById: `SELECT * FROM tasks WHERE id = ?`,
+    insert: `INSERT INTO tasks (title, description, due_date) VALUES (?, ?, ?)`,
+    update: `UPDATE tasks set title=?, description= ? WHERE id = ?`,
+    deleteById: `DELETE FROM tasks WHERE id = ?`
+}
 
-export { taskTable };
+export { taskModel };

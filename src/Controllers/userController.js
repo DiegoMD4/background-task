@@ -51,10 +51,14 @@ const loginUser = (req, res) => {
             const match = bcrypt.compare(password, user.password);
 
             if (match) {
-                const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, {
-                    expiresIn: '1h',
-                });
-                console.log('Generated Token:', token);
+                const token = jwt.sign(
+                    { email: user.email, id: user.id },
+                    process.env.SECRET_KEY,
+                    {
+                        expiresIn: '1d',
+                    }
+                );
+                console.log('Generated Token:', token, user.id);
                 return res.status(200).json({ message: 'Login successful', user, token });
             } else {
                 return res.status(401).json({ message: 'Invalid email or password' });

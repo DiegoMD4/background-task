@@ -4,12 +4,12 @@ const router = express.Router();
 
 router.get('/get', getTask);
 
-router.get('/get/:id', getTaskById);
+router.get('/get/:id/', getTaskById);
 
-router.post('/post', postTask);
+router.post('/post/', postTask);
 
-router.put('/put/:id', updateTask);
+router.put('/put/:id/', updateTask);
 
-router.delete('/delete/:id', deleteTask);
+router.delete('/delete/:id/', deleteTask);
 
 export default router;

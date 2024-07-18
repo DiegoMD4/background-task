@@ -8,8 +8,8 @@ const finishingTask = (id) => {
 
     connection.query(query, [id], (err, result) => {
         if (err) console.error('Error executing query:', err.stack);
-        if(result == 0){
-            console.log('no task are close to expire')
+        if (result == 0) {
+            console.log('no task are close to expire');
         }
         console.log(result);
     });

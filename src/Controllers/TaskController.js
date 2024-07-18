@@ -30,8 +30,7 @@ const postTask = (req, res) => {
             if (err) {
                 console.error('Error executing query:', err.stack);
             } else {
-                res.status(200).json({ message: 'inserted correctly' });
-                return console.log(result[0]);
+                return res.status(200).json({ message: 'inserted correctly'});
             }
         }
     );

@@ -1,5 +1,6 @@
 import connection from '../Database/config.js';
 import { userModel } from '../Models/userModel.js';
+import {deadLineTask} from '../Services/backgroundTask.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const saltRounds = 10;
@@ -58,8 +59,10 @@ const loginUser = (req, res) => {
                         expiresIn: '1d',
                     }
                 );
+                
                 console.log('Generated Token:', token, user.id);
-                return res.status(200).json({ message: 'Login successful', user, token });
+                res.status(200).json({ message: 'Login successful', user, token })
+                return deadLineTask(user.id);
             } else {
                 return res.status(401).json({ message: 'Invalid email or password' });
             }
@@ -68,6 +71,7 @@ const loginUser = (req, res) => {
         console.error('Error checking user:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
+    
 };
 
 export { getUser, registerUser, loginUser };

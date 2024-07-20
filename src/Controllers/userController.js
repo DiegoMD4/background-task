@@ -1,5 +1,7 @@
 import connection from '../Database/config.js';
 import { userModel } from '../Models/userModel.js';
+import { deadLineTask } from '../Services/backgroundTask.js';
+import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const saltRounds = 10;
@@ -15,12 +17,14 @@ const getUser = (req, res) => {
 };
 
 const registerUser = (req, res) => {
-    const { name, password, email } = req.body;
+    const { name, password, email, username } = req.body;
+    const id = uuidv4();
+
     if (!email || !password || !name) {
         res.status(400).json({ message: 'Username, email and password required' });
     }
     bcrypt.hash(password, saltRounds, function (err, hash) {
-        connection.query(userModel.insert, [name, hash, email], (err, result) => {
+        connection.query(userModel.insert, [name, hash, email, username, id], (err, result) => {
             if (err) {
                 console.log('Error executing query:', err.stack);
             } else {
@@ -58,8 +62,9 @@ const loginUser = (req, res) => {
                         expiresIn: '1d',
                     }
                 );
-                console.log('Generated Token:', token, user.id);
-                return res.status(200).json({ message: 'Login successful', user, token });
+                console.log('Generated Token:', token);
+                res.status(200).json({ message: 'Login successful', user, token });
+                return deadLineTask(user.id);
             } else {
                 return res.status(401).json({ message: 'Invalid email or password' });
             }

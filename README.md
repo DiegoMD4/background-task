@@ -20,7 +20,7 @@ Endpoint: DELETE /tasks/:id
 
 Tareas en segundo plano:
 
-Un proceso que corra cada hora y envíe un recordatorio (por ejemplo, log a la consola) para las tareas cuya fecha de vencimiento sea dentro de las próximas 24 horas.
+✅Un proceso que corra cada hora y envíe un recordatorio (por ejemplo, log a la consola) para las tareas cuya fecha de vencimiento sea dentro de las próximas 24 horas.
 Base de datos relacional (MySQL):
 
 Modelo de datos para las tareas (tasks):
@@ -32,7 +32,7 @@ created_at (TIMESTAMP)
 updated_at (TIMESTAMP)
 Seguridad:
 
-Implementación de autenticación JWT para proteger los endpoints de la API.
+✅Implementación de autenticación JWT para proteger los endpoints de la API.
 Validación y saneamiento de entradas para prevenir inyección SQL y otras vulnerabilidades.
 Pruebas unitarias:
 
@@ -47,7 +47,7 @@ Configurar el ORM (por ejemplo, Sequelize) para manejar el modelo de datos tasks
 Autenticación JWT:
 
 Implementar el registro y login de usuarios.
-Proteger los endpoints de la API usando middleware de autenticación JWT.
+✅Proteger los endpoints de la API usando middleware de autenticación JWT.
 Endpoints CRUD:
 
 Crear los endpoints para manejar las operaciones CRUD de las tareas.

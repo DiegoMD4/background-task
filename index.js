@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import taskRoutes from './src/Routes/task.js';
 import userRoutes from './src/Routes/user.js';
-import { deadLineTask } from './src/Services/BackgroundTask.js'; 
+
 import { verifyToken } from './src/jwt/verifyToken.js';
 
 //application settings
@@ -37,5 +37,4 @@ app.listen(app.get('PORT'), (req, res) => {
     console.log(`🟢 Server started at http://localhost:${app.get('PORT')}`);
 });
 
-//Services
-deadLineTask();
+
